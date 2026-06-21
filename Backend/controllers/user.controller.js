@@ -2,17 +2,23 @@ const userModel = require("../models/user.model");
 const userService = require("../services/user.service");
 const {validationResult} = require("express-validator");
 const blacklistTokenModel = require("../models/blacklistToken.model");
+
 const registerUserController = async (req,res)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
     }
-    console.log("Request body:", req.body); 
     const hashedPassword = await userModel.hashPassword(req.body.password);
     req.body.password = hashedPassword;
     try {
 
         const {fullname,email,password} = req.body;
+
+        const isUserExist = await userModel.findOne({email});
+        if(isUserExist){
+            return res.status(400).json({error: "User already exists with this email"});
+        }
+
         const user = await userService.createUser({
             firstname: fullname.firstname,
             lastname: fullname.lastname,

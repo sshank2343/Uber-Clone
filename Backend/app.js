@@ -6,6 +6,7 @@ const app = express();
 const connectToDB = require('./db/db');
 const userRouter = require('./routes/user.route');
 const cookieParser = require('cookie-parser');
+const captainRouter = require('./routes/captain.route');
 // Connect to MongoDB
 connectToDB();
 
@@ -18,7 +19,7 @@ app.use(cookieParser());
 
 // Define your routes here
 app.use('/users', userRouter);
-
+app.use('/captains', captainRouter);
 
 
 module.exports = app;
