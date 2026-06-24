@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext } from 'react'
 import { Link ,useNavigate} from 'react-router-dom'
-import {UserDataContext} from '../context/UserContext.jsx'
+import {UserDataContext} from '../context/UserContext'
 import axios from 'axios'
 
 const UserSignup = () => {
-  const [email, setEmail] = useState('')
+      const [email, setEmail] = useState('')
       const [password, setPassword] = useState('')
       const [firstname, setFirstname] = useState('')
       const [lastname, setLastname] = useState('')
       const navigate = useNavigate()
-      const contextValue = React.useContext(UserDataContext)
-      const setUser = Array.isArray(contextValue) ? contextValue[1] : contextValue?.setUser
+      const {user, setUser} = useContext(UserDataContext)
       
       const submitHandler = async (e)=>{
           e.preventDefault()
@@ -23,20 +22,20 @@ const UserSignup = () => {
               password:password,
           }
 
-          const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newUser)
-          if(response.status === 201){
-            const data = response.data
-            if (typeof setUser === 'function') {
+          try {
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newUser)
+            if(response.status === 201){
+              const data = response.data
               setUser(data.user)
+              navigate('/home')
             }
-            navigate('/home')
+            setEmail('')
+            setPassword('')
+            setFirstname('')
+            setLastname('')
+          } catch (error) {
+            console.log('Signup error:', error.response?.data || error.message)
           }
-
-          setEmail('')
-          setPassword('')
-          setFirstname('')
-          setLastname('')
-          // Handle login logic here
       }
   return (
     <div className='p-7 flex flex-col justify-between h-screen'>
@@ -102,7 +101,7 @@ const UserSignup = () => {
 
       </div>
 
-      
+
       <div>
         <p className='text-[12px] text-gray-500'>By proceeding, you consent to get calls, WhatsApp or SMS messages, including by automated means, from Uber and its affiliates to the number provided.</p>
       </div>
