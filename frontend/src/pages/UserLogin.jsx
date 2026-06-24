@@ -45,13 +45,13 @@ const UserLogin = () => {
         placeholder="Enter Password" 
         />
         <button
-        className='bg-[#111] text-white font-semibold mb-2 rounded px-4 py-2 border w-full text-lg '
+        className='bg-[#111] text-white font-semibold mb-2 rounded-lg px-4 py-2 border w-full text-lg '
         >Login</button>
         <p className='text-center '>New here? <Link className='text-blue-600' to='/signup'>Create new Account</Link></p>
       </form>
       </div>
       <div>
-        <Link className='bg-[#10b461] flex items-center justify-center text-white font-semibold mb-2 rounded px-4 py-2 border w-full text-lg ' to='/captain-login'>Sign in as Captain</Link>
+        <Link className='bg-[#10b461] flex items-center justify-center text-white font-semibold mb-2 rounded-lg px-4 py-2 border w-full text-lg ' to='/captain-login'>Sign in as Captain</Link>
       </div>
     </div>
   )

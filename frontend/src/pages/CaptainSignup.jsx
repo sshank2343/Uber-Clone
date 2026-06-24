@@ -10,7 +10,7 @@ const CaptainSignup = () => {
         const submitHandler = (e)=>{
             e.preventDefault()
             setUserData({
-              fullName:{
+              fullname:{
                 firstname:firstname,
                 lastname:lastname
               },
@@ -28,7 +28,7 @@ const CaptainSignup = () => {
       <div>
         <img className='w-16 mb-3' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ235OAQzJpBUmRN76bp3FV2oLymKktq8WNvO1pLga-uztm27uEICPS-GsR&s=10" alt="" />
         <form onSubmit={(e)=>{submitHandler(e)}}>
-        <h3 className='text-lg font-medium mb-2'>What's your name</h3>
+        <h3 className='text-lg font-medium mb-2'>What's our Captain's name</h3>
         <div className='flex gap-3 mb-5'>
           <input 
         required
@@ -51,7 +51,7 @@ const CaptainSignup = () => {
         }}
          />
         </div>
-        <h3 className='text-lg font-medium mb-2'>What's your email</h3>
+        <h3 className='text-lg font-medium mb-2'>What's our Captain's email </h3>
         <input 
         required
         className='bg-[#eeeeee] mb-5 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
@@ -76,7 +76,7 @@ const CaptainSignup = () => {
         }}
          />
         <button
-        className='bg-[#111] text-white font-semibold mb-2 rounded px-4 py-2 border w-full text-lg '
+        className='bg-[#111] text-white font-semibold mb-2 rounded-lg px-4 py-2 border w-full text-lg '
         >Signup</button>
         <p className='text-center '>Already have a account? <Link className='text-blue-600' to='/captain-login'>Login here</Link></p>
       </form>
