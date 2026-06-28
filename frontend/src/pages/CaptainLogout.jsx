@@ -1,18 +1,26 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const CaptainLogout = () => {
 
     const token = localStorage.getItem('token')
     const navigate=useNavigate()
+    const logoutStartedRef = useRef(false)
 
     useEffect(()=>{
-        if(!token){
-            navigate('/captain-login')
+        if(logoutStartedRef.current){
+            return
         }
 
-        axios.get(`${import.meta.env.VITE_BASE_URL}/captains/logout`,{
+        if(!token){
+            navigate('/captain-login')
+            return
+        }
+
+        logoutStartedRef.current = true
+
+        axios.post(`${import.meta.env.VITE_BASE_URL}/captains/logout`, {}, {
             headers:{
                 Authorization:`Bearer ${token}`
             }
